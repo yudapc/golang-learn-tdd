@@ -1,2 +1,4 @@
 package: learn-test
-import: []
+import:
+- package: github.com/dustin/go-humanize
+  version: v1.0.0
