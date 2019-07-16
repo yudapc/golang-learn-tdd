@@ -68,3 +68,13 @@ func TestJsonToMapStringInterfaceHasError(test *testing.T) {
 		test.Errorf("The result from function JsonToMapStringInterface is correct!, please make to wrong")
 	}
 }
+
+func TestDecodeJsonToInterface(test *testing.T) {
+	var jsonString = `{"name": "Jhon Doe", "age": 15}`
+	data := DecodeJsonToInterface(jsonString)
+	expected := "Jhon Doe"
+	result := data["name"]
+	if result != expected {
+		test.Errorf("The result from function JsonToMapStringInterface is wrong!, data[\"name\"] = %s", data["name"])
+	}
+}

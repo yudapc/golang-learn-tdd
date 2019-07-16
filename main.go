@@ -44,3 +44,11 @@ func JsonToMapStringInterface(jsonData string) (map[string]interface{}, error) {
 	}
 	return dataUser, nil
 }
+
+func DecodeJsonToInterface(jsonData string) map[string]interface{} {
+	var jsonToByte = []byte(jsonData)
+	var data interface{}
+	json.Unmarshal(jsonToByte, &data)
+	var decodedData = data.(map[string]interface{})
+	return decodedData
+}
