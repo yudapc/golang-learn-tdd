@@ -103,7 +103,6 @@ func TestDecodeArrayJSONToObjectHasError(test *testing.T) {
 	]`
 
 	_, err := DecodeArrayJSONToObject(jsonString)
-
 	if err == nil {
 		test.Errorf("The result from function DecodeArrayJSONToObject is correct, please change to error")
 	}
