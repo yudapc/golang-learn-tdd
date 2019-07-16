@@ -7,3 +7,7 @@ func Addition(first int, second int) int {
 func Reduction(first int, second int) int {
 	return first - second
 }
+
+func Division(first int, second int) int {
+	return first / second
+}
