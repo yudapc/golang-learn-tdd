@@ -33,3 +33,14 @@ func GetUserFromJson(jsonData string) (User, error) {
 	}
 	return data, nil
 }
+
+func JsonToMapStringInterface(jsonData string) (map[string]interface{}, error) {
+	var dataUser map[string]interface{}
+	var jsonToByte = []byte(jsonData)
+	var err = json.Unmarshal(jsonToByte, &dataUser)
+	if err != nil {
+		fmt.Println(err.Error())
+		return dataUser, err
+	}
+	return dataUser, nil
+}

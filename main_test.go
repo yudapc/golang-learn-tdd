@@ -51,3 +51,20 @@ func TestGetUserFromJsonWhenHasError(test *testing.T) {
 		test.Errorf("The result from function GetUserFromJson is correct!")
 	}
 }
+
+func TestJsonToMapStringInterface(test *testing.T) {
+	var jsonString = `{"name": "Kamu lah", "age": 15}`
+	var expected float64 = 15
+	data, _ := JsonToMapStringInterface(jsonString)
+	if data["age"] != expected {
+		test.Errorf("The result from function JsonToMapStringInterface is wrong!, data[\"age\"] = %0.f", data["age"])
+	}
+}
+
+func TestJsonToMapStringInterfaceHasError(test *testing.T) {
+	var jsonString = `[{"namex": "Kamu lah", "ngapain": 15}]`
+	_, err := JsonToMapStringInterface(jsonString)
+	if err == nil {
+		test.Errorf("The result from function JsonToMapStringInterface is correct!, please make to wrong")
+	}
+}
