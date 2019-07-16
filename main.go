@@ -22,8 +22,8 @@ type User struct {
 	Age  int    `json:"age"`
 }
 
-func GetUserFromJson(jsonData string) (User, error) {
-	var jsonToByte = []byte(jsonData)
+func GetUserFromJson(jsonParams string) (User, error) {
+	var jsonToByte = []byte(jsonParams)
 	var data User
 
 	var err = json.Unmarshal(jsonToByte, &data)
@@ -34,9 +34,9 @@ func GetUserFromJson(jsonData string) (User, error) {
 	return data, nil
 }
 
-func JsonToMapStringInterface(jsonData string) (map[string]interface{}, error) {
+func JsonToMapStringInterface(jsonParams string) (map[string]interface{}, error) {
 	var dataUser map[string]interface{}
-	var jsonToByte = []byte(jsonData)
+	var jsonToByte = []byte(jsonParams)
 	var err = json.Unmarshal(jsonToByte, &dataUser)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -45,16 +45,16 @@ func JsonToMapStringInterface(jsonData string) (map[string]interface{}, error) {
 	return dataUser, nil
 }
 
-func DecodeJsonToInterface(jsonData string) map[string]interface{} {
-	var jsonToByte = []byte(jsonData)
+func DecodeJsonToInterface(jsonParams string) map[string]interface{} {
+	var jsonToByte = []byte(jsonParams)
 	var data interface{}
 	json.Unmarshal(jsonToByte, &data)
 	var decodedData = data.(map[string]interface{})
 	return decodedData
 }
 
-func DecodeArrayJSONToObject(jsonData string) ([]User, error) {
-	var jsonToByte = []byte(jsonData)
+func DecodeArrayJSONToObject(jsonParams string) ([]User, error) {
+	var jsonToByte = []byte(jsonParams)
 	var users []User
 	var err = json.Unmarshal(jsonToByte, &users)
 	if err != nil {
@@ -63,8 +63,8 @@ func DecodeArrayJSONToObject(jsonData string) ([]User, error) {
 	return users, nil
 }
 
-func EncodeObjectToJSON(jsonData User) string {
-	var jsonFromString, _ = json.Marshal(jsonData)
+func EncodeObjectToJSON(jsonParams User) string {
+	var jsonFromString, _ = json.Marshal(jsonParams)
 	var data = string(jsonFromString)
 	return data
 }
