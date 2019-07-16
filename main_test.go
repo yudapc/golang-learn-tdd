@@ -107,3 +107,11 @@ func TestDecodeArrayJSONToObjectHasError(test *testing.T) {
 		test.Errorf("The result from function DecodeArrayJSONToObject is correct, please change to error")
 	}
 }
+
+func TestEncodeObjectToJSON(test *testing.T) {
+	var jsonString = User{Name: "Jhon Doe", Age: 15}
+	result := EncodeObjectToJSON(jsonString)
+	if result == "" {
+		test.Errorf("The result from function EncodeObjectToJSON is wrong!")
+	}
+}

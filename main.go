@@ -62,3 +62,9 @@ func DecodeArrayJSONToObject(jsonData string) ([]User, error) {
 	}
 	return users, nil
 }
+
+func EncodeObjectToJSON(jsonData User) string {
+	var jsonFromString, _ = json.Marshal(jsonData)
+	var data = string(jsonFromString)
+	return data
+}
