@@ -78,3 +78,33 @@ func TestDecodeJsonToInterface(test *testing.T) {
 		test.Errorf("The result from function JsonToMapStringInterface is wrong!, data[\"name\"] = %s", data["name"])
 	}
 }
+
+func TestDecodeArrayJSONToObject(test *testing.T) {
+	var jsonString = `[
+		{"name": "Dhani", "age": 35},
+		{"name": "Jhon Doe", "age": 15}
+	]`
+
+	users, _ := DecodeArrayJSONToObject(jsonString)
+	expectedName := "Dhani"
+	expectedAge := 15
+	resultName := users[0].Name
+	resultAge := users[1].Age
+
+	if expectedName != resultName || expectedAge != resultAge {
+		test.Errorf("The result from function JsonToMapStringInterface is wrong!, resultName (%s) != %s, resultAge (%d) != %d", resultName, expectedName, resultAge, expectedAge)
+	}
+}
+
+func TestDecodeArrayJSONToObjectHasError(test *testing.T) {
+	var jsonString = `[
+		{"name": "Dhani", "age": 35},
+		{"name": "Jhon Doe", "age": 15
+	]`
+
+	_, err := DecodeArrayJSONToObject(jsonString)
+
+	if err == nil {
+		test.Errorf("The result from function DecodeArrayJSONToObject is correct, please change to error")
+	}
+}

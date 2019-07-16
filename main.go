@@ -52,3 +52,13 @@ func DecodeJsonToInterface(jsonData string) map[string]interface{} {
 	var decodedData = data.(map[string]interface{})
 	return decodedData
 }
+
+func DecodeArrayJSONToObject(jsonData string) ([]User, error) {
+	var jsonToByte = []byte(jsonData)
+	var users []User
+	var err = json.Unmarshal(jsonToByte, &users)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
+}
