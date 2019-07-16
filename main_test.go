@@ -33,3 +33,21 @@ func TestDivision(test *testing.T) {
 		test.Errorf("The result from function Division is wrong!, %d / %d = %d", first, second, expected)
 	}
 }
+
+func TestGetUserFromJson(test *testing.T) {
+	var jsonString = `{"name": "Kamu lah", "age": 15}`
+	var expected = "Kamu lah"
+	user, _ := GetUserFromJson(jsonString)
+	result := user.Name
+	if result != expected {
+		test.Errorf("The result from function GetUserFromJson is wrong!, user Name is %s not equal %s", expected, result)
+	}
+}
+
+func TestGetUserFromJsonWhenHasError(test *testing.T) {
+	var jsonString = `[{"namex": "Kamu lah", "ngapain": 15}]`
+	_, err := GetUserFromJson(jsonString)
+	if err == nil {
+		test.Errorf("The result from function GetUserFromJson is correct!")
+	}
+}
