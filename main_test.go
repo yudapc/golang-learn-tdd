@@ -115,3 +115,21 @@ func TestEncodeObjectToJSON(test *testing.T) {
 		test.Errorf("The result from function EncodeObjectToJSON is wrong!")
 	}
 }
+
+func TestValidationUsingJSONSchema(test *testing.T) {
+	var jsonString = `{"email": "jhon@doe.com", "password": "securewords"}`
+	var expected = "The document is valid"
+	result := ValidationUsingJSONSchema(jsonString)
+	if result != expected {
+		test.Errorf("The result from ValidationUsingJSONSchema is wrong!")
+	}
+}
+
+func TestValidationUsingJSONSchemaHasError(test *testing.T) {
+	var jsonString = `{"email": "jhon@doe.com", "passwords": "securewords"}`
+	var expected = "The document is invalid"
+	result := ValidationUsingJSONSchema(jsonString)
+	if result != expected {
+		test.Errorf("The result from ValidationUsingJSONSchema is wrong!")
+	}
+}

@@ -3,6 +3,8 @@ package tdd
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/xeipuuv/gojsonschema"
 )
 
 func Addition(first int, second int) int {
@@ -67,4 +69,29 @@ func EncodeObjectToJSON(jsonParams User) string {
 	var jsonFromString, _ = json.Marshal(jsonParams)
 	var data = string(jsonFromString)
 	return data
+}
+
+func ValidationUsingJSONSchema(inputPayload string) string {
+	var jsonByte = []byte(inputPayload)
+	var jsonString = string(jsonByte)
+	var documentLoader = gojsonschema.NewStringLoader(jsonString)
+
+	var filePath = "file:///Users/yudaprabucogati/Workspace/go-workspace/src/belajar_validation_json_schema/login-param.json"
+	schemaLoader := gojsonschema.NewReferenceLoader(filePath)
+
+	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	if result.Valid() {
+		fmt.Printf("The document is valid\n")
+		return "The document is valid"
+	} else {
+		fmt.Printf("The document is not valid. see errors :\n")
+		for _, desc := range result.Errors() {
+			fmt.Printf("- %s\n", desc)
+		}
+		return "The document is invalid"
+	}
 }

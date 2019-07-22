@@ -1,6 +1,12 @@
-hash: 17459e361cde2f56d244a8576ada1c0cf8fe47b23d72bfd9f9b27497af8c1235
-updated: 2019-07-16T22:35:08.347565+07:00
+hash: fa7d1b6e7514a9cc11c377210544f13131100cb38c601fea61a6ef1435c61580
+updated: 2019-07-22T23:29:51.50479+07:00
 imports:
 - name: github.com/dustin/go-humanize
   version: 9f541cc9db5d55bce703bd99987c9d5cb8eea45e
+- name: github.com/xeipuuv/gojsonpointer
+  version: 4e3ac2762d5f479393488629ee9370b50873b3a6
+- name: github.com/xeipuuv/gojsonreference
+  version: bd5ef7bd5415a7ac448318e64f11a24cd21e594b
+- name: github.com/xeipuuv/gojsonschema
+  version: f971f3cd73b2899de6923801c147f075263e0c50
 testImports: []
