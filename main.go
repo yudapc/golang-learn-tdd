@@ -78,7 +78,7 @@ func ValidationUsingJSONSchema(inputPayload string) (string, error) {
 	var jsonString = string(jsonByte)
 	var documentLoader = gojsonschema.NewStringLoader(jsonString)
 
-	var filePath = "file:///Users/yudaprabucogati/Workspace/go-workspace/src/belajar_validation_json_schema/login-param.json"
+	var filePath = "file://./login-param.json"
 	schemaLoader := gojsonschema.NewReferenceLoader(filePath)
 
 	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
