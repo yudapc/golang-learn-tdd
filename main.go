@@ -2,7 +2,9 @@ package tdd
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/xeipuuv/gojsonschema"
 )
@@ -71,7 +73,7 @@ func EncodeObjectToJSON(jsonParams User) string {
 	return data
 }
 
-func ValidationUsingJSONSchema(inputPayload string) string {
+func ValidationUsingJSONSchema(inputPayload string) (string, error) {
 	var jsonByte = []byte(inputPayload)
 	var jsonString = string(jsonByte)
 	var documentLoader = gojsonschema.NewStringLoader(jsonString)
@@ -81,17 +83,19 @@ func ValidationUsingJSONSchema(inputPayload string) string {
 
 	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
 	if err != nil {
-		fmt.Println(err.Error())
+		return "", err
 	}
 
 	if result.Valid() {
 		fmt.Printf("The document is valid\n")
-		return "The document is valid"
+		return "The document is valid", nil
 	} else {
+		var errorMessages []string
 		fmt.Printf("The document is not valid. see errors :\n")
 		for _, desc := range result.Errors() {
 			fmt.Printf("- %s\n", desc)
+			errorMessages = append(errorMessages, desc.Description())
 		}
-		return "The document is invalid"
+		return "", errors.New(strings.Join(errorMessages, ", "))
 	}
 }
