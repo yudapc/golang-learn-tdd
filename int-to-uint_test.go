@@ -12,5 +12,4 @@ func TestIntToUint(test *testing.T) {
 	if typeValue != reflect.Uint {
 		test.Errorf("Value type is not uint")
 	}
-
 }
