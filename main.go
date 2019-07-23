@@ -2,11 +2,7 @@ package tdd
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
-	"strings"
-
-	"github.com/xeipuuv/gojsonschema"
 )
 
 func Addition(first int, second int) int {
@@ -71,31 +67,4 @@ func EncodeObjectToJSON(jsonParams User) string {
 	var jsonFromString, _ = json.Marshal(jsonParams)
 	var data = string(jsonFromString)
 	return data
-}
-
-func ValidationUsingJSONSchema(inputPayload string) (string, error) {
-	var jsonByte = []byte(inputPayload)
-	var jsonString = string(jsonByte)
-	var documentLoader = gojsonschema.NewStringLoader(jsonString)
-
-	var filePath = "file://./login-param.json"
-	schemaLoader := gojsonschema.NewReferenceLoader(filePath)
-
-	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
-	if err != nil {
-		return "", err
-	}
-
-	if result.Valid() {
-		fmt.Printf("The document is valid\n")
-		return "The document is valid", nil
-	} else {
-		var errorMessages []string
-		fmt.Printf("The document is not valid. see errors :\n")
-		for _, desc := range result.Errors() {
-			fmt.Printf("- %s\n", desc)
-			errorMessages = append(errorMessages, desc.Description())
-		}
-		return "", errors.New(strings.Join(errorMessages, ", "))
-	}
 }
