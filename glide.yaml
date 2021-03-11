@@ -1,7 +1,0 @@
-package: learn-test
-import:
-- package: github.com/dustin/go-humanize
-  version: v1.0.0
-- package: github.com/xeipuuv/gojsonschema
-  version: v1.1.0
-- package: github.com/xeipuuv/gojsonreference
